@@ -6,8 +6,7 @@ pub fn main(string_: String) -> Vec<(String, i8)> {
     let mut analysis: BTreeMap<String, i8> = BTreeMap::new();
 
     for character in string_.chars() {
-        let non_ascii = character.to_string();
-        *analysis.entry(non_ascii).or_insert(0) += 1;
+        *analysis.entry((character as i8).to_string()).or_insert(0) += 1;
     }
 
     let mut v: Vec<(String, i8)> = Vec::from_iter(analysis);
