@@ -1,20 +1,16 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
+use std::iter::FromIterator;
 
-pub fn main(string_: String) -> HashMap<String, i8> {
+pub fn main(string_: String) -> Vec<(String, i8)> {
     // create a table for every ascii character that is 1 byte long
-    let mut analysis: HashMap<String, i8> = HashMap::new();
+    let mut analysis: BTreeMap<String, i8> = BTreeMap::new();
 
     for character in string_.chars() {
         let non_ascii = character.to_string();
-        let get = analysis.get(&non_ascii);
-        
-        let count = if get == None {
-            0
-        }
-        else {
-            *get.unwrap() as i8
-        };
-        analysis.insert(non_ascii, count + 1);
+        *analysis.entry(non_ascii).or_insert(0) += 1;
     }
-    return analysis;
+
+    let mut v: Vec<(String, i8)> = Vec::from_iter(analysis);
+    v.sort_by(|&(_, a), &(_, b)| b.cmp(&a));
+    return v;
 }
