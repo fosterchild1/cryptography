@@ -6,13 +6,15 @@ pub fn main(string_: String) -> HashMap<String, i8> {
 
     for character in string_.chars() {
         let non_ascii = character.to_string();
-        if analysis.get(&non_ascii) == None {
-            analysis.insert(non_ascii, 1);
+        let get = analysis.get(&non_ascii);
+        
+        let count = if get == None {
+            0
         }
         else {
-            let count = analysis.get(&non_ascii).unwrap();
-            analysis.insert(non_ascii, count + 1);
-        }   
+            *get.unwrap() as i8
+        };
+        analysis.insert(non_ascii, count + 1);
     }
     return analysis;
 }
