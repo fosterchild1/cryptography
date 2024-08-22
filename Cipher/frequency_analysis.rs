@@ -6,6 +6,7 @@ pub fn main(string_: String) -> Vec<(String, i8)> {
     let mut analysis: BTreeMap<String, i8> = BTreeMap::new();
 
     for character in string_.chars() {
+        if character == ' ' {continue}
         *analysis.entry((character as i8).to_string()).or_insert(0) += 1;
     }
 

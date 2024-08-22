@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
-pub fn main(string_: String, analysis: Vec<(String, i8)>) -> (String, String) {   
+fn decode(string_: String, dot: String, dash: String) -> String {
+    //let temp_replacement: String = "Ç".to_string();
     let ascii_morse_dict = HashMap::from([
         ("/" , 32),
         (".-...", 38),
@@ -79,14 +80,26 @@ pub fn main(string_: String, analysis: Vec<(String, i8)>) -> (String, String) {
         ("-.--", 121),
         ("--..", 122)
     ]);
+
     let mut final_str: String = "".to_string();
-    
-    for morse in string_.split(" ") {
+    let replaced_string = string_.clone().replace(&dot, ".").replace(&dash, "-");
+
+    for morse in replaced_string.split(" ") {
         let ascii = ascii_morse_dict.get(morse);
         if ascii != None {
             final_str = final_str + &(*ascii.unwrap() as u8 as char).to_string();
         }
     }
 
-    return (final_str.clone(), final_str)
+    return final_str;
+}
+
+pub fn main(string_: String, analysis: Vec<(String, i8)>) -> (String, String) {   
+    let a1 = (analysis[0].0.parse::<i8>().unwrap() as u8 as char).to_string();
+    let a2 = (analysis[1].0.parse::<i8>().unwrap() as u8 as char).to_string();
+
+    let final_str: String = decode(string_.clone(), a1.clone(), a2.clone());
+    let rev_str: String = decode(string_, a2, a1);
+
+    return (final_str, rev_str)
 }
