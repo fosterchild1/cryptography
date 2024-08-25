@@ -7,7 +7,7 @@ fn decode(string_: String, shift: i8) -> String {
         let kchar = character as u8;
 
         if kchar >= 97 && kchar <= 122 {
-            let new_character = max((character as i8 - shift) % 122, 97);
+            let new_character = max((character as i8 - shift) % 26 + 96, 97);
             final_str = final_str + &(new_character as u8 as char).to_string();
         } else {
             final_str = final_str + &(kchar as char).to_string();
@@ -17,6 +17,6 @@ fn decode(string_: String, shift: i8) -> String {
     return final_str
 }
 
-pub fn main(string_: String, _analysis: Vec<(String, i32)>) -> String {
-    return decode(string_, 3); // example shift until every other cipher is done
+pub fn main(string_: String, _analysis: Vec<(String, i32)>, shift: i8) -> String {
+    return decode(string_, shift);
 }
