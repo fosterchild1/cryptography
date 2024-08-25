@@ -9,7 +9,7 @@ fn decode(string_: String, dot: String, dash: String, space: String) -> String {
 
     let mut final_str: String = "".to_string();
     let replaced_string = string_.clone().replace(&dot, ".").replace(&dash, "-").replace(&space, " ");
-    println!("{}" ,replaced_string);
+ 
     for morse in replaced_string.split(" ") {
         let ascii = ascii_morse_dict.get(morse);
         if ascii != None {
