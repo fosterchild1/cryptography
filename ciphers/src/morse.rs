@@ -1,6 +1,6 @@
 use std::collections::HashMap;
-use dictionaries;
-use utils::get_from_analysis;
+use crate::dictionaries;
+use crate::proj_utils::get_from_analysis;
 
 fn decode(string_: String, dot: String, dash: String, space: String) -> String {
     //let temp_replacement: String = "Ç".to_string();

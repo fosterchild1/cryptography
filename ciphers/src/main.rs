@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 mod frequency_analysis;
 pub mod dictionaries;
-pub mod utils;
+pub mod proj_utils;
 
 mod bacon;
 mod caesar;
